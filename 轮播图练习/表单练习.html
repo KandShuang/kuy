@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    </style>
+    <script>
+        window.onload = function(){
+            // 获取四个多选框
+            const hobbies = document.getElementsByName("hobby")
+            // 获取全选按钮
+            const allBtn = document.getElementById("all")
+            // 完成全选按钮功能
+            allBtn.addEventListener("click",function(){
+                //将多选框设置成选中状态
+                for(i=0;i<hobbies.length;i++){
+                    hobbies[i].checked = true
+                }
+            })
+
+            //完成取消按钮功能
+            //获取
+            const no = document.getElementById("no")
+            no.addEventListener("click",function(){
+                for(i=0;i<hobbies.length;i++){
+                    hobbies[i].checked = false
+                }
+            })
+
+            // 完成反选按钮
+            const reverse = document.getElementById("reverse")
+            reverse.onclick = function(){
+                for(i=0;i<hobbies.length;i++){
+                    hobbies[i].checked = !hobbies[i].checked
+                }
+            }
+
+            // 完成提交按钮
+            const send = document.getElementById("send")
+            send.onclick = function(){
+                for(i=0;i<hobbies.length;i++){
+                    if(hobbies[i].checked){
+                        alert("你选择的爱好是：" + hobbies[i].value)
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <form action="#">
+            <div>
+                请选择你的爱好：
+                <input type="checkbox" id="check-all" /> 全选
+            </div>
+            <div>
+                <input type="checkbox" name="hobby" value="乒乓球" /> 乒乓球
+                <input type="checkbox" name="hobby" value="篮球" /> 篮球
+                <input type="checkbox" name="hobby" value="羽毛球" /> 羽毛球
+                <input type="checkbox" name="hobby" value="足球" /> 足球
+            </div>
+            <div>
+                <button type="button" id="all">全选</button>
+                <button type="button" id="no">取消全选</button>
+                <button type="button" id="reverse">反选</button>
+                <button type="button" id="send">提交</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

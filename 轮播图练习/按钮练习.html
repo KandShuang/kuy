@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload = function () {
+            // 获取全选复选框
+            let checkALL = document.getElementById("check-all")
+
+            //获取四个复选框
+            let hobbies = document.getElementsByName("hobby")
+
+            // 获取全选按钮
+            let allBtn = document.getElementById("all")
+
+            // 获取取消全选按钮
+            let no = document.getElementById("no")
+
+            //获取反选按钮
+            let reverse = document.getElementById("reverse")
+
+            //获取提交按钮
+            let send = document.getElementById("send")
+
+
+
+            //为全选复选框绑定事件
+            checkALL.onclick = function () {
+                for (let i = 0; i < hobbies.length; i++) {
+                    hobbies[i].checked = checkALL.checked
+                }
+            }
+
+            //为小复选框和全选复选框做绑定
+            for (let i = 0; i < hobbies.length; i++) {
+
+                hobbies[i].onclick = function () {
+                    // 获取所有选中的复选框
+                    let checkedBox = document.querySelectorAll("[name = hobby]:checked")
+
+                    // 判断hobbies是否全选
+                    if (hobbies.length === checkedBox.length) {
+                        checkALL.checked = true
+                    }
+                    else {
+                        checkALL.checked = false
+                    }
+                }
+            }
+
+            // 为全选按钮绑定单击事件
+            allBtn.addEventListener("click", function () {
+
+                // 将多选框设置为选定状态
+                for (let i = 0; i < hobbies.length; i++) {
+                    hobbies[i].checked = true
+                }
+                checkALL.checked = true
+            })
+
+            //为取消全选按钮绑定事件
+            no.addEventListener("click", function () {
+                for (let i = 0; i < hobbies.length; i++) {
+                    hobbies[i].checked = false
+                }
+                checkALL.checked = false
+            })
+
+            //为反选按钮绑定事件
+            reverse.addEventListener("click", function () {
+                for (let i = 0; i < hobbies.length; i++) {
+                    //if 写法 较麻烦
+                    // if(hobbies[i].checked==true){
+                    //     hobbies[i].checked=false
+                    // }else if(hobbies[i].checked==false){
+                    //     hobbies[i].checked=true
+                    // }
+
+
+                    //取反写法
+                    hobbies[i].checked = !hobbies[i].checked
+                }
+                // 获取所有选中的复选框
+                let checkedBox = document.querySelectorAll("[name = hobby]:checked")
+
+                // 判断hobbies是否全选
+                if (hobbies.length === checkedBox.length) {
+                    checkALL.checked = true
+                }
+                else {
+                    checkALL.checked = false
+                }
+            })
+
+            //为提交按钮绑定单击事件
+            let ik = []
+            send.addEventListener("click", function () {
+                for (let i = 0; i < hobbies.length; i++) {
+                    if (hobbies[i].checked == true && ik.includes(hobbies[i]) == false) {
+                        ik.push(hobbies[i].value)
+                    }
+                }
+                alert("你选择的爱好是:" + ik)
+                ik = []
+            })
+
+        }
+    </script>
+</head>
+
+<body>
+    <div>
+        <form action="#">
+            <div>
+                请选择你的爱好：
+                <input type="checkbox" id="check-all" /> 全选
+            </div>
+            <div>
+                <input type="checkbox" name="hobby" value="乒乓球" /> 乒乓球
+                <input type="checkbox" name="hobby" value="篮球" /> 篮球
+                <input type="checkbox" name="hobby" value="羽毛球" /> 羽毛球
+                <input type="checkbox" name="hobby" value="足球" /> 足球
+            </div>
+            <div>
+                <button type="button" id="all">全选</button>
+                <button type="button" id="no">取消全选</button>
+                <button type="button" id="reverse">反选</button>
+                <button type="button" id="send">提交</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
